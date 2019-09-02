@@ -50,20 +50,32 @@ return linksFound;
   }
 };
 mdLinks.validateLink(url);
-
-mdLinks.validateLink = url => {
-  const urlProtocol = url.startsWith('https') ? require('https') : require('http');
-  const request = urlProtocol.get(url, (response)=>{
-    console.log(response.statusMessage,  response.statusCode);
-  });
-  request.on('error', (error) => {
-    console.error (error.status);
-  });
-}
-
-  mdLinks.validateLink(url);
 */
+//Validate with http.get o https.get 
+/*
+mdLinks.validateLink =  url => {
+  let linkValidate = 0;
+  //let linkBroken = 0;
+  for(let i = 0; i < url.length; i++) {
+    const urlProtocol = url[i].startsWith('https') ? require('https') : require('http');
+    const request =  urlProtocol.get(url[i], (response)=>{
+      console.log([i] + ' '+ url[i] + ' ' + response.statusMessage,  response.statusCode);
+    //  linkValidate++;
+    });
+    request.on('error', (error) => {
+      console.error ([i] + 'fail ' + error.status);
+    });
+  }
+  
+  if (stats) {
+    //console.log('\n Total: ' + url.length + '\n Unique: '+ linkValidate + '\n Broken: '+ linkBroken);
+    console.log('\n Total: ' + url.length + '\n Unique: '+ linkValidate + '\n Broken: ');
+  }
+}*/
 
+ // mdLinks.validateLink(url);
+
+ /***** Validate with Library Axios*/
   mdLinks.validateLink = async url => {
   let linkValidate = 0;
   let linkBroken = 0;
@@ -84,13 +96,11 @@ mdLinks.validateLink = url => {
   if (stats) {
   console.log('\n Total: ' + url.length + '\n Unique: '+ linkValidate + '\n Broken: '+ linkBroken);
   }
-};
-
-//mdLinks.validateLink(url);
+  };
+/******************/
 
 
   //console.log(mdLinks.mdReadFile('readme.md', () => {}));
-  //mdLinks.mdReadFile('readme.md');
   mdLinks.mdReadFile(filePath);
   module.exports = mdLinks
  
