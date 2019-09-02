@@ -25,7 +25,7 @@ describe('mdReadFile', () => {
   });
 /*
   it('should return the links', () => {
-    expect(mdLinks.mdReadFile('README.md')).toBe('https://es.wikipedia.org/wiki/Markdown');
+    expect(mdLinks.mdReadFile('README.md')[0]).toBe('https://es.wikipedia.org/wiki/Markdown');
   });
 */
 });
